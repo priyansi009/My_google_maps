@@ -17,7 +17,9 @@ The map opens in the browser and displays:
 * Bhubaneswar as the center location
 * A marker titled **"Bhubaneswar!!!"**
 * Zoom level set to 12
-![Google Map Preview](myMap.png)
+### Main Map View
+![Map View](images/myMap.png)
+
 
 ## 🛠️ Technologies Used
 
