@@ -1,0 +1,147 @@
+<html>
+    <head>
+        <title>My Google Maps</title>
+        <style>
+            #map {
+                height: 500px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <script>
+            function initMap() {
+                const bbsr={lat: 20.296059, lng: 85.824539}; // Bhubaneswar coordinates
+
+    // ----------- Create a map object centered at Bhubaneswar------------
+                const map=new google.maps.Map(document.getElementById("map"),{
+                    center: bbsr,
+                    zoom: 12,
+                    //costomize the map options as needed
+                   // cameraControl: false, // Disable camera control
+                   // mapTypeControl: false, // Disable map type control
+                   // streetViewControl: false, // Disable Street View control
+                   //fullscreenControl: false,// Disable fullscreen control
+                   // gestureHandling: "none",// Disable all user gestures
+                });
+                
+    // ----------- Create a circle around Bhubaneswar -----------
+                const circle=new google.maps.Circle({ //maps, radius
+                    center:bbsr,
+                    radius:6000, // 6 km radius
+                    //fillColor:"#FF0000", // Red fill color
+                    fillOpacity:0.3, // Semi-transparent fill
+                    //strokeColor:"#FF0000", // Red stroke color
+                    strokeOpacity:1.0, // Fully opaque stroke   
+                    draggable:true, // Allow the circle to be draggable
+                    editable:true, // Allow the circle to be editable
+                    map:map, // Add the circle to the map
+                });
+
+    // ----------Create a rectangle around Bhubaneswar ------------
+                //const rectangle=new google.maps.Rectangle({ //maps, bounds
+                   // bounds:{
+                       // north:20.306059,
+                       // south:20.286059,
+                       //east:85.834539,
+                       // west:85.814539
+                    //},
+                   //fillColor:"#0000FF", // Blue fill color
+                   // strokeColor:"#0000FF", // Blue stroke color
+                   // fillOpacity:0.3,  strokeOpacity:1.0, 
+                   // draggable:true,  editable:true,
+                   // map:map, 
+               // });
+
+    //------------ Create a polygon around Bhubaneswar -----------
+                //const polygon=new google.maps.Polygon({ //maps, paths
+                    //paths:[
+                        //{lat:20.306059, lng:85.834539},
+                        //{lat:20.286059, lng:85.834539},
+                        //{lat:20.286059, lng:85.814539},
+                        //{lat:20.306059, lng:85.814539}
+                    //],
+                //});
+
+    //------------- Create a polyline around Bhubaneswar -----------
+                //const polyline=new google.maps.Polyline({maps, paths:[]});
+
+
+    // ------------ Create a marker Animation at Bhubaneswar -----------
+                const marker=new google.maps.Marker({
+                    position: bbsr,
+                    map: map,
+                    title: "Bhubaneswar!!!",
+                    animation: google.maps.Animation.DROP,
+                    //icon: {
+                      //  path: google.maps.SymbolPath.CIRCLE,
+                      //  scale: 10
+                   // },
+                });
+                marker.addListener("click",()=>{
+                    if(marker.getAnimation()!==null){
+                        marker.setAnimation(null);
+                    }else{
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                });
+
+                    
+                    //example of marker clustering with multiple markers
+                    //const locations=[
+                        //{lat:20.296059, lng:85.824539},
+                        //{lat:20.306059, lng:85.834539},
+                        //{lat:20.286059, lng:85.814539},
+                        //{lat:20.316059, lng:85.844539},
+                        //{lat:20.276059, lng:85.804539}
+                    //];
+                    //const markers=locations.map((location) => new google.maps.Marker({
+                      //  position: location,
+                       // map: map,
+
+                    //}));
+                    // Initialize the MarkerClusterer with explicit keys
+                    //new markerClusterer.MarkerClusterer({markers, map});
+
+
+
+
+    // ------------- Create an info window with content -------------
+                const infoWindow=new google.maps.InfoWindow({
+                    content:"<h3>welcome to bhubaneswar city!</h3><p>the city that is a cultural foundation of Odisha</p>"
+                });
+
+    // ------------- Add a click event listener to the marker to open the info window -------------
+               // marker.addListener("click", (event) => {
+                   // infoWindow.open(map, marker);
+                //});
+
+    // ------------ Add a click event listener to the map to place a marker -------------
+                map.addListener("click", (event) => {
+                new google.maps.Marker({
+                    position: event.latLng,
+                    map: map,
+                    title: "Clicked Location",
+            });
+
+    // ------------ Map click event ---------------
+                //map.addListener('click', (e) => console.log(e.latLng));
+
+                // Zoom changed
+                //map.addListener('zoom_changed', () => console.log(map.getZoom()));
+
+                // Bounds changed
+                //map.addListener('bounds_changed', () => console.log(map.getBounds()));
+                });
+
+                
+            }
+        </script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDipOhe0k-TV-ogChoI72uIwsqTU48wvRk&callback=initMap"></script>
+        <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+    </body>
+</html>
+
